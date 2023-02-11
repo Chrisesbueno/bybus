@@ -4,13 +4,14 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import { useCallback } from "react";
+import { ScrollView } from "react-native";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-
   const [fontsLoaded] = useFonts({
-    Montserrat: require("@/utils/fonts/Montserrat.ttf"),
+    'Italic': require("@/utils/fonts/Montserrat-Italic-VariableFont_wght.ttf"),
+    'Regular': require("@/utils/fonts/Montserrat-VariableFont_wght.ttf"),
   });
 
   const onLayoutRootView = useCallback(async () => {
@@ -28,3 +29,4 @@ export default function App() {
     </SafeAreaProvider>
   );
 }
+
