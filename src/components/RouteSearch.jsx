@@ -1,106 +1,74 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
-import CustomInput from './CustomInput';
+import { View, Image, TextInput, TouchableOpacity } from "react-native";
+import React from "react";
 import styles from "@/utils/styles/RouteSearch.module.css";
-import Icon from "./Icon"
-// libreria del picker
-import CustomDatePicker from './CustomDatePicker';
-
-
-{/*
-       contenedor de Route Search 
-       control : para decirle a que formulario pertenece
-       handleSubmut: ()=> void function para el boton de buscar 
-       watch: para acceder a variables y modificar vistas textos ....
-      */}
+import CustomTimePicker from "./CustomTimeDatePicker";
 
 const RouteSearch = ({ control, handleSubmit, watch, collapsed = false }) => {
-    // estado que sirve para mostrar o ocultar el picker
-    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-
-    // accedemos a la variable date
-    const date = watch("date")
-
-
-    //    funcion para setear a true la vista del picker
-    const showDatePicker = () => {
-        setDatePickerVisibility(true);
-    };
-
-
-    return (
-        <View style={[styles.container, styles.containerRouteSearch]}>
-            {/* rectangulo de decoracion */}
-            <View style={{
-                backgroundColor: "white", height: 5, width: 50, borderRadius: 50,
-                marginTop: 8, marginBottom: 15,
-            }} />
-            {/* Input Partida */}
-            {!collapsed && <CustomInput
-                control={control}
-                name={"departure"}
-                placeholder={"Barquisimeto, Lara"}
-                number={false}
-                icon={{
-                    name: "home-map-marker",
-                    color: "#FFFFFF",
-                    size: 25,
-                }}
-                styled={{
-                    text: styles.textInput,
-                    input: styles.inputContainer,
-                }}
-                placeholderTextColor={"#FFFFFF"}
-                iconRight={{
-                    name: "close",
-                    color: "#404040",
-                    size: 25,
-                }}
-            />}
-            {/*Input Destino */}
-            <CustomInput
-                control={control}
-                name={"destination"}
-                placeholder={"Guanare, Portuguesa"}
-                number={false}
-                icon={{
-                    name: "map-marker-radius",
-                    color: "#FFFFFF",
-                    size: 25,
-                }}
-                styled={{
-                    text: styles.textInput,
-                    input: styles.inputContainer,
-                }}
-                placeholderTextColor={"#FFFFFF"}
-                iconRight={{
-                    name: "arrow-all",
-                    color: "#404040",
-                    size: 25,
-                }}
-            />
-
-
-            {/* container Options */}
-            <View style={styles.containerOption}>
-                {/* Hora */}
-                <TouchableOpacity style={styles.containerHour} onPress={showDatePicker}>
-                    <Text style={{ color: "white", marginRight: 5 }}>{`${new Date(date).toLocaleTimeString({ hour: '2-digit', minute: '2-digit' })}`}</Text>
-                    <Icon name={"clock-outline"} color={"white"} size={20} />
-                    <CustomDatePicker control={control} isVisible={isDatePickerVisible} setIsVisible={setDatePickerVisibility} />
-                </TouchableOpacity>
-                {/* tipo transporte */}
-                <TouchableOpacity style={styles.containerTransport} >
-                    <Icon name={"bus"} color={"white"} size={20} />
-                    <Icon name={"chevron-down"} color={"white"} size={20} />
-                </TouchableOpacity>
-                {/* button search*/}
-                <TouchableOpacity style={styles.containerSearchBtn} onPress={handleSubmit}>
-                    <Icon name={"map-search-outline"} color={"white"} size={24} />
-                </TouchableOpacity>
-            </View>
+  return (
+    <View style={styles.container}>
+      <View style={styles.inputs}>
+        <View style={styles.input}>
+          <Image
+            style={{
+              width: 28,
+              height: 28,
+              resizeMode: "cover",
+            }}
+            source={require("@/utils/images/target-white.png")}
+          />
+          <TextInput
+            style={styles.inputText}
+            placeholder={`Barquisimeto, Lara`}
+            placeholderTextColor={`#9d9d9d`}
+          />
+          <Image
+            style={{
+              width: 25,
+              height: 25,
+              resizeMode: "cover",
+            }}
+            source={require("@/utils/images/close.png")}
+          />
         </View>
-    )
-}
+        <View style={styles.input}>
+          <Image
+            style={{
+              width: 28,
+              height: 28,
+              resizeMode: "cover",
+            }}
+            source={require("@/utils/images/destination-white.png")}
+          />
+          <TextInput
+            style={styles.inputText}
+            placeholder={`Guanare, Portuguesa`}
+            placeholderTextColor={`#9d9d9d`}
+          />
+          <Image
+            style={{
+              width: 25,
+              height: 25,
+              resizeMode: "cover",
+            }}
+            source={require("@/utils/images/arrow-white.png")}
+          />
+        </View>
+      </View>
+      <View style={styles.options}>
+        <CustomTimePicker />
+        <TouchableOpacity activeOpacity={1} style={styles.search}>
+        <Image
+            style={{
+              width: 32,
+              height: 32,
+              resizeMode: "cover",
+            }}
+            source={require("@/utils/images/search-black.png")}
+          />
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
 
-export default RouteSearch
+export default RouteSearch;

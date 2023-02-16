@@ -1,15 +1,11 @@
 .container {
   flex: 1;
-  padding: 20px;
+  /* padding: 20px; */
+  background-color: #ffce48;
 }
-
-.button {
-  background-color: purple;
-  padding: 10px;
-  border-radius: 10px;
-  color: red;
-  text-align: center;
-  font-size: 15px;
-  width: 50%;
-  font-family: "Regular";
+.containerSearch {
+  flex: 1;
+}
+.bottom {
+  flex: 1;
 }
